@@ -6,7 +6,7 @@ const schema = new mongoose.Schema(
         apellidos: { type: String},
         email: { type: String},
         password: { type: String},
-        telfono: { type: Number},
+        telefono: { type: Number},
         foto: { type: String},
         admin: { type: Boolean},
     },{
