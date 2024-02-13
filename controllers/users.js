@@ -16,6 +16,27 @@ const controller = {
         } catch (error) {
             next(error)
         }
+    }, 
+    
+    inicioSesion: async(req,res,next) => {
+        try {
+            let user = await User.findOne({ email: req.user.email})
+            user.password = null    
+            const token = jwt.sign(
+                { id: user._id},
+                process.env.SECRET,
+                { expiresIn: 60*60*48}
+            )
+            return res
+                .status(200)
+                .json({
+                    message: 'sesion iniciada',
+                    user,
+                    token
+                })
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
