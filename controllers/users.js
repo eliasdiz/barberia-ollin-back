@@ -7,6 +7,7 @@ const controller = {
     crear: async(req,res,next) => {
         req.body.admin = false
         req.body.foto = ''
+        req.body.barbero = false
         req.body.password = bcryptjs.hashSync(req.body.password,10)
         try {
             await User.create(req.body)
@@ -37,7 +38,18 @@ const controller = {
         } catch (error) {
             next(error)
         }
-    }
+    },
+
+    getAll: async(req,res,next) => {
+        try {
+            let usuarios = await User.find()
+            return res
+                .status(200)
+                .json({ usuarios})
+        } catch (error) {
+            next(error)
+        }
+    },
 }
 
 export default controller

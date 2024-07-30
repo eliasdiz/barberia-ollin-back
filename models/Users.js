@@ -9,6 +9,7 @@ const schema = new mongoose.Schema(
         telefono: { type: Number},
         foto: { type: String},
         admin: { type: Boolean},
+        barbero: { type: Boolean}
     },{
         timestamps: true,
         versionKey: false
