@@ -41,15 +41,81 @@ const controller = {
     },
 
     getAll: async(req,res,next) => {
+        const query = {}
+        if(req.query.parametro) query.parametro = req.query.parametro
         try {
-            let usuarios = await User.find()
-            return res
-                .status(200)
-                .json({ usuarios})
+            if(query.parametro === 'barberos'){
+                let query = {}
+                if (req.query.nombres){
+                    query.$or = [
+                        { nombres: {  $regex: new RegExp( req.query.nombres,'i') }},
+                        { apellidos: {  $regex: new RegExp( req.query.nombres,'i') } },
+                        {
+                            $and: [
+                                { nombres: { $regex: new RegExp(req.query.nombres.split(' ').join('|'), 'i') } },
+                                { apellidos: { $regex: new RegExp(req.query.nombres.split(' ').join('|'), 'i') } }
+                            ]
+                        }
+                    ]
+                }
+                let usuarios = await User.find({barbero: true, ...query}).sort({nombres: 1})
+                return res
+                    .status(200)
+                    .json({ usuarios})
+            }else if(query.parametro === 'clientes'){
+                let query = {}
+                if (req.query.nombres){
+                    query.$or = [
+                        { nombres: {  $regex: new RegExp( req.query.nombres,'i') }},
+                        { apellidos: {  $regex: new RegExp( req.query.nombres,'i') } },
+                        {
+                            $and: [
+                                { nombres: { $regex: new RegExp(req.query.nombres.split(' ').join('|'), 'i') } },
+                                { apellidos: { $regex: new RegExp(req.query.nombres.split(' ').join('|'), 'i') } }
+                            ]
+                        }
+                    ]
+                }
+                let usuarios = await User.find({barbero: false, ...query}).sort({nombres: 1})
+                return res 
+                    .status(200)
+                    .json({ usuarios})
+            }else{
+                let query = {}
+                if (req.query.nombres){
+                    query.$or = [
+                        { nombres: {  $regex: new RegExp( req.query.nombres,'i') }},
+                        { apellidos: {  $regex: new RegExp( req.query.nombres,'i') } },
+                        {
+                            $and: [
+                                { nombres: { $regex: new RegExp(req.query.nombres.split(' ').join('|'), 'i') } },
+                                { apellidos: { $regex: new RegExp(req.query.nombres.split(' ').join('|'), 'i') } }
+                            ]
+                        }
+                    ]
+                }
+                let usuarios = await User.find(query).sort({nombres: 1})
+                return res
+                    .status(200)
+                    .json({ usuarios})
+            }
         } catch (error) {
             next(error)
         }
     },
+
+    editarRol: async(req,res,next) => {
+        try {
+            await User.findByIdAndUpdate(req.params.id,req.body)
+            return res
+            .status(200)
+            .json({
+                    message: 'usuario actualizado',
+                });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default controller
