@@ -40,6 +40,20 @@ const controller = {
         }
     },
 
+    getUsuario: async(req,res,next) => {
+        const { user } = req
+        try {
+            let usuario = await User.findById(user._id)
+            if(usuario){
+                return res 
+                    .status(200)
+                    .json({ usuario })
+            }
+        } catch (error) {
+            next(error)
+        }
+    },
+
     getAll: async(req,res,next) => {
         const query = {}
         if(req.query.parametro) query.parametro = req.query.parametro
