@@ -115,6 +115,17 @@ const controller = {
         } catch (error) {
             next(error);
         }
+    },
+
+    deleteOne: async(req,res,next) => {
+        try {
+            await User.findByIdAndDelete(req.params.id)
+            return res  
+                .status(200)
+                .json({ message: 'usuario eliminado'})
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
