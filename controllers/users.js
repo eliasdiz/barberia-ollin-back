@@ -40,6 +40,32 @@ const controller = {
         }
     },
 
+    cerrarSesion: async(req,res,next) => {
+        const {user} = req
+        try {
+            await User.findById(user._id)
+            return res  
+                .status(200)
+                .json({message: 'sesion finalizada'})
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    getUsuario: async(req,res,next) => {
+        const { user } = req
+        try {
+            let usuario = await User.findById(user._id)
+            if(usuario){
+                return res 
+                    .status(200)
+                    .json({ usuario })
+            }
+        } catch (error) {
+            next(error)
+        }
+    },
+
     getAll: async(req,res,next) => {
         const query = {}
         if(req.query.parametro) query.parametro = req.query.parametro
