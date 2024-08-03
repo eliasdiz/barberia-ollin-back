@@ -40,6 +40,18 @@ const controller = {
         }
     },
 
+    cerrarSesion: async(req,res,next) => {
+        const {user} = req
+        try {
+            await User.findById(user._id)
+            return res  
+                .status(200)
+                .json({message: 'sesion finalizada'})
+        } catch (error) {
+            next(error)
+        }
+    },
+
     getUsuario: async(req,res,next) => {
         const { user } = req
         try {
