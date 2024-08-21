@@ -1,6 +1,9 @@
 import User from '../models/Users.js'
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import crearEmailTransporter from '../config/mailer.js'
+
+
 
 const controller = {
 
@@ -10,7 +13,10 @@ const controller = {
         req.body.barbero = false
         req.body.password = bcryptjs.hashSync(req.body.password,10)
         try {
-            await User.create(req.body)
+            let usuario = await User.create(req.body)
+            crearEmailTransporter(usuario)
+                // .then( res => console.log(res))
+                // .catch(error => console.log(error))
             return res  
                 .status(201)
                 .json({ message: 'usuario creado con exito'})
