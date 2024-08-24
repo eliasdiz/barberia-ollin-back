@@ -18,7 +18,7 @@ router.post('/inicio-sesion', usuarioExistenteInicio, passwordOk, inicioSesion)
 router.post('/cerrar-sesion', passport.authenticate('jwt', {session:false}),cerrarSesion )
 router.get('/', getAll )
 router.get('/usuario', passport.authenticate('jwt', {session: false}), getUsuario )
-router.put('/usuario/:id',validator(schemaEditarUsuario), editar)
+router.put('/usuario/:id',passport.authenticate('jwt', {session:false}),validator(schemaEditarUsuario), editar)
 router.delete('/:id', deleteOne )
 
 export default router

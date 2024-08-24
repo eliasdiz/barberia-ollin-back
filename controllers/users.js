@@ -137,14 +137,20 @@ const controller = {
     },
 
     editar: async(req,res,next) => {
-        req.body.password = bcryptjs.hashSync(req.body.password,10)
         try {
-            await User.findByIdAndUpdate(req.params.id,req.body,{new:true})
+            let usuario = await User.findById(req.params.id)
+            if(req.body.password){
+                let passIgual = bcryptjs.compareSync(req.body.password,usuario.password) 
+                if(!passIgual){
+                    req.body.password = bcryptjs.hashSync(req.body.password, 10);
+                }else{
+                    req.body.password = usuario.password
+                }
+            }
+            await User.findByIdAndUpdate(req.params.id,req.body)
             return res
-            .status(200)
-            .json({
-                    message: 'usuario actualizado',
-                });
+                .status(200)
+                .json({ message: 'usuario actualizado'})
         } catch (error) {
             next(error);
         }
