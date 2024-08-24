@@ -136,9 +136,10 @@ const controller = {
         }
     },
 
-    editarRol: async(req,res,next) => {
+    editar: async(req,res,next) => {
+        req.body.password = bcryptjs.hashSync(req.body.password,10)
         try {
-            await User.findByIdAndUpdate(req.params.id,req.body)
+            await User.findByIdAndUpdate(req.params.id,req.body,{new:true})
             return res
             .status(200)
             .json({

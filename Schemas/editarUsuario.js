@@ -45,6 +45,9 @@ const schema = Joi.object({
         }),
 
     password: Joi
+        .any(),
+
+    barbero: Joi
         .any()
 
 
