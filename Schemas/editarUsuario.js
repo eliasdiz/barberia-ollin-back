@@ -33,17 +33,17 @@ const schema = Joi.object({
         }),
     
     telefono: Joi
-        .string()
+        .number()
+        .integer()
+        .min(1000000000)  
+        .max(9999999999)  
         .required()
-        .length(10)
-        .pattern(/^\d+$/)  // Asegura que solo contenga dígitos
         .messages({
-            'string.empty': 'Debes ingresar un teléfono',
-            'any.required': 'Debes ingresar un teléfono',
-            'string.length': 'El número debe tener 10 dígitos',
-            'string.pattern.base': 'El número debe contener solo dígitos'
+            'number.empty': 'Debes ingresar un teléfono',
+            'number.min': 'El número debe tener 10 dígitos',
+            'number.max': 'El número debe tener 10 dígitos',
+            'any.required': 'Debes ingresar un teléfono'
         }),
-
     password: Joi
         .any(),
 
