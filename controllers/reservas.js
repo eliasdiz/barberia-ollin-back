@@ -17,18 +17,18 @@ const controller = {
 
     validarEmail: async(req,res,next) => {
         try {
-            let usuario = await User.findOne({email: req.body.email})
-            if(usuario){
+            let cliente = await User.findOne({email: req.body.email}).select('id nombres apellidos email telefono')
+            if(cliente){
                 return res
                     .status(200)
                     .json({ 
                         message: 'usuario confirmado',
-                        usuario
+                        cliente
                     })
             }else{
                 return res
                     .status(400)
-                    .json({ message: 'usuario no encontrado, te invitamos a resgistrare!!'})
+                    .json({ message: 'usuario no encontrado, te invitamos a resgistrarte!!'})
             }
         } catch (error) {
             next(error)
