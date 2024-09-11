@@ -33,6 +33,20 @@ const controller = {
         } catch (error) {
             next(error)
         }
+    },
+
+    getClientes: async(req,res,next) => {
+        try {
+            let reservas = await Reservas.find({cliente_id: req.params.id})
+                .sort({fecha: 1})
+                .populate('barbero_id','nombres')
+                .populate('servicio_id','servicio valor')
+            return res  
+                .status(200)
+                .json({ reservas})
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
