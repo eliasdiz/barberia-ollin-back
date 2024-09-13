@@ -35,7 +35,7 @@ const controller = {
         }
     },
 
-    getClientes: async(req,res,next) => {
+    getReservasCliente: async(req,res,next) => {
         try {
             let reservas = await Reservas.find({cliente_id: req.params.id})
                 .sort({fecha: 1})
@@ -44,6 +44,17 @@ const controller = {
             return res  
                 .status(200)
                 .json({ reservas})
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    getReservasBarbero: async(req,res,next) => {
+        try {
+            let reservas = await Reservas.find({barbero_id: req.params.id})
+                return res
+                    .status(200)
+                    .json({ reservas})
         } catch (error) {
             next(error)
         }
