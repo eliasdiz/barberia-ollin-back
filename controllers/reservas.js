@@ -58,6 +58,23 @@ const controller = {
         } catch (error) {
             next(error)
         }
+    },
+    
+    eliminarReservaUsuario: async(req,res,next) => {
+        try {
+            let reserva = await Reservas.findByIdAndDelete(req.params.id)
+            if(reserva){
+                return res
+                    .status(200)
+                    .json({ message: 'reserva eliminada'})
+            }else{
+                return res
+                    .status(400)
+                    .json({ message: 'reserva no encontrada'})
+            }
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
