@@ -60,7 +60,7 @@ const controller = {
         }
     },
     
-    eliminarReservaUsuario: async(req,res,next) => {
+    eliminarReservaCliente: async(req,res,next) => {
         try {
             let reserva = await Reservas.findByIdAndDelete(req.params.id)
             if(reserva){
