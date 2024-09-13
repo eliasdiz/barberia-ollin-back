@@ -35,7 +35,7 @@ const controller = {
         }
     },
 
-    getClientes: async(req,res,next) => {
+    getReservasCliente: async(req,res,next) => {
         try {
             let reservas = await Reservas.find({cliente_id: req.params.id})
                 .sort({fecha: 1})
@@ -49,7 +49,18 @@ const controller = {
         }
     },
 
-    eliminarReservaUsuario: async(req,res,next) => {
+    getReservasBarbero: async(req,res,next) => {
+        try {
+            let reservas = await Reservas.find({barbero_id: req.params.id})
+                return res
+                    .status(200)
+                    .json({ reservas})
+        } catch (error) {
+            next(error)
+        }
+    },
+    
+    eliminarReservaCliente: async(req,res,next) => {
         try {
             let reserva = await Reservas.findByIdAndDelete(req.params.id)
             if(reserva){
@@ -62,7 +73,6 @@ const controller = {
                     .json({ message: 'reserva no encontrada'})
             }
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }
