@@ -51,8 +51,10 @@ const controller = {
     },
 
     getReservasBarbero: async(req,res,next) => {
+        const hoy = new Date().setHours(0,0,0,0)
         try {
-            let reservas = await Reservas.find({barbero_id: req.params.id})
+            let reservas = await Reservas.find({barbero_id: req.params.id, fecha:{$gte: hoy}})
+                .sort({fecha: 1})
                 return res
                     .status(200)
                     .json({ reservas})
