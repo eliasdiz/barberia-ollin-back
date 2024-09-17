@@ -4,7 +4,7 @@ import User from '../models/Users.js'
 const controller = {
 
     crear: async(req,res,next) => {
-        req.body.estado = true
+        req.body.activa = true
         try {
             await Reservas.create(req.body)
             return res
@@ -65,7 +65,7 @@ const controller = {
         }
     },
     
-    eliminarReservaCliente: async(req,res,next) => {
+    eliminarReserva: async(req,res,next) => {
         try {
             let reserva = await Reservas.findByIdAndDelete(req.params.id)
             if(reserva){
