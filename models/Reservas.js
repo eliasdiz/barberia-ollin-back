@@ -6,7 +6,7 @@ const schema = new mongoose.Schema(
         cliente_id: { type: mongoose.Types.ObjectId, ref: 'Users'},
         servicio_id: { type: mongoose.Types.ObjectId, ref: 'Servicios'},
         fecha: { type: Date},
-        estado: { type: Boolean},
+        activa: { type: Boolean},
     },{
         timestamps: true,
         versionKey: false
