@@ -86,16 +86,19 @@ const controller = {
     actualizarEstado: async(req,res,next) => {
         try {
             let reserva = await Reservas.findByIdAndUpdate(req.params.id,{ activa: false})
-            .populate('servicio_id', 'valor -_id')
+                .populate('servicio_id', 'servicio valor')
             if(reserva){
+                console.log(reserva)
                 req.body.reserva_id = reserva._id
+                req.body.barbero_id = reserva.barbero_id
                 req.body.fecha = reserva.fecha
+                req.body.servicio = reserva.servicio_id.servicio
                 req.body.valor = reserva.servicio_id.valor
                 try {
-                    await IngresosBarberos.create(req.body)
+                    let ingreso = await IngresosBarberos.create(req.body)
                     return res  
                         .status(201)
-                        .json({message: 'servicio iniciado'})
+                        .json({message: 'servicio iniciado', ingreso})
                 } catch (error) {
                     next(error)
                 }
