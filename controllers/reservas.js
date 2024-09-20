@@ -39,7 +39,7 @@ const controller = {
     getReservasCliente: async(req,res,next) => {
         const hoy = new Date().setHours(0,0,0,0)
         try {
-            let reservas = await (await Reservas.find({cliente_id: req.params.id, fecha:{$gte: hoy}}))
+            let reservas = await Reservas.find({cliente_id: req.params.id, fecha:{$gte: hoy}})
                 .sort({fecha: 1})
                 .populate('barbero_id','nombres')
                 .populate('servicio_id','servicio valor')
