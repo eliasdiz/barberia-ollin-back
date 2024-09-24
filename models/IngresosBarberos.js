@@ -6,7 +6,7 @@ const schema = new mongoose.Schema(
         barbero_id: { type: mongoose.Types.ObjectId, ref:'Users'},
         fecha: {type: Date},
         valor: {type: Number},
-        servicio: {type: String}
+        servicio: {type: Array}
     },{
         timestamps: true,
         versionKey: false
