@@ -89,7 +89,6 @@ const controller = {
         try {
             let reserva = await Reservas.findByIdAndUpdate(req.params.id,{ activa: false})
             if(reserva){
-                console.log(reserva)
                 req.body.reserva_id = reserva._id
                 req.body.barbero_id = reserva.barbero_id
                 req.body.fecha = reserva.fecha
