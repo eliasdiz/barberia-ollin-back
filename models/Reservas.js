@@ -4,9 +4,10 @@ const schema = new mongoose.Schema(
     {
         barbero_id: { type: mongoose.Types.ObjectId, ref: 'Users'},
         cliente_id: { type: mongoose.Types.ObjectId, ref: 'Users'},
-        servicio_id: { type: mongoose.Types.ObjectId, ref: 'Servicios'},
+        servicio: { type: Array},
         fecha: { type: Date},
         activa: { type: Boolean},
+        valor: { type: Number}
     },{
         timestamps: true,
         versionKey: false
