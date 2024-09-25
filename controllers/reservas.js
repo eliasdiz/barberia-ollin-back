@@ -45,7 +45,7 @@ const controller = {
                     activa: true
             })
                 .sort({fecha: 1})
-                .populate('barbero_id','nombres')
+                .populate('barbero_id','nombres apellidos')
                 return res  
                     .status(200)
                     .json({ reservas})
@@ -59,6 +59,7 @@ const controller = {
         try {
             let reservas = await Reservas.find({barbero_id: req.params.id, fecha:{$gte: hoy}})
                 .sort({fecha: 1})
+                .populate('barbero_id', 'nombres apellidos')
                 .populate('cliente_id','nombres apellidos telefono email')
                 return res
                     .status(200)
