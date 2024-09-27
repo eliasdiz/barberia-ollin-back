@@ -41,7 +41,7 @@ const controller = {
         try {
             let reservas = await Reservas.find({
                     cliente_id: req.params.id, 
-                    fecha:{$gte: hoy},
+                    'fecha.horaInicio':{$gte: hoy},
                     activa: true
             })
                 .sort({fecha: 1})
