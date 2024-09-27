@@ -57,7 +57,10 @@ const controller = {
     getReservasBarbero: async(req,res,next) => {
         const hoy = new Date().setHours(0,0,0,0)
         try {
-            let reservas = await Reservas.find({barbero_id: req.params.id, fecha:{$gte: hoy}})
+            let reservas = await Reservas.find({
+                barbero_id: req.params.id, 
+                'fecha.horaInicio':{$gte: hoy}
+            })
                 .sort({fecha: 1})
                 .populate('barbero_id', 'nombres apellidos')
                 .populate('cliente_id','nombres apellidos telefono email')
