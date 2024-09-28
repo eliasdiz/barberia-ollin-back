@@ -95,7 +95,7 @@ const controller = {
             if(reserva){
                 req.body.reserva_id = reserva._id
                 req.body.barbero_id = reserva.barbero_id
-                req.body.fecha = reserva.fecha
+                req.body.fecha = reserva.fecha.horaInicio
                 req.body.servicio = reserva.servicio
                 req.body.valor = reserva.valor
                 try {
