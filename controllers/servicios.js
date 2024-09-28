@@ -15,10 +15,32 @@ const controller = {
 
     getTodos: async(req,res,next) => {
         try {
-            let servicios = await Servicios.find()
+            let servicios = await Servicios.find().sort({servicio: 1})
             return res
                 .status(200)
                 .json({ servicios})
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    eliminar: async(req,res,next) => {
+        try {
+            await Servicios.findByIdAndDelete(req.params.id)
+            return res  
+                .status(200)
+                .json({message: 'servicio eliminado'})
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    editar: async(req,res,next) => {
+        try {
+            await Servicios.findByIdAndUpdate(req.params.id,req.body)
+            return res  
+                .status(200)
+                .json({ message: 'servicio actualizado'})
         } catch (error) {
             next(error)
         }
