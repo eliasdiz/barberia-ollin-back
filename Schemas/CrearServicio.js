@@ -7,9 +7,9 @@ const schema = Joi.object({
         .required()
         .min(4)
         .messages({
-            'string.empty':'debes ingresar un nombre para el servicio',
-            'string.min':'el nombre debe tener minimo 4 caracteres',
-            'any.required': 'debes ingresar un nombre para el servicio'
+            'string.empty':'ingresa un nombre para el servicio',
+            'string.min':'nombre debe tener minimo 4 letras',
+            'any.required': 'ingresa un nombre para el servicio'
         }),
 
     valor: Joi
@@ -23,8 +23,7 @@ const schema = Joi.object({
         }),
     
     adicional: Joi
-        .any()
-
+        .boolean()
 })
 
 export default schema
