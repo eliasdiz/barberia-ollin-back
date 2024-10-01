@@ -44,6 +44,17 @@ const controller = {
         } catch (error) {
             next(error)
         }
+    },
+
+    getUno: async(req,res,next) => {
+        try {
+            let servicio = await Servicios.findById(req.params.id)
+            return res
+                .status(200)
+                .json({ servicio })
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
