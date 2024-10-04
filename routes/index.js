@@ -4,6 +4,7 @@ import servicios from './servicios.js'
 import reservas from './reservas.js'
 import ingresos from './ingresos.js'
 import carrito from './carrito.js'
+import productos from './productos.js'
 
 
 const router = express.Router();
@@ -15,6 +16,7 @@ router.use('/servicios',servicios)
 router.use('/reservas',reservas)
 router.use('/ingresos', ingresos)
 router.use('/carrito', carrito)
+router.use('/productos', productos)
 
 
 export default router
