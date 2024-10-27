@@ -6,7 +6,7 @@ const { crear, getTodos } = controller
 
 const router = express.Router()
 
-router.post('/:id', passport.authenticate('jwt',{session:false}), crear)
+router.post('/crear', passport.authenticate('jwt',{session:false}), crear)
 router.get('/', passport.authenticate('jwt',{session:false}), getTodos)
 
 

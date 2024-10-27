@@ -1,4 +1,3 @@
-import { format } from "@formkit/tempo";
 import Carrito from "../models/Carrito.js";
 
 const controller = {
@@ -8,15 +7,14 @@ const controller = {
         req.body.productos = []
         req.body.total = 0
         req.body.activo = true
-        req.body.cliente_id = req.params.id
+        // req.body.cliente_id = req.params.id
         try {
             let carrito = await Carrito.create(req.body)
             return res
                 .status(201)
-                .json({ message: 'carrito creado',
-                    carrito
-                })
+                .json({ message: 'carrito creado', carrito})
         } catch (error) {
+            console.log(error)
             next(error)
         }
     },
