@@ -6,7 +6,7 @@ const schema = new mongoose.Schema(
         precio: {type: Number},
         stock: {type: Number},
         unidad_medida: {type: String},
-        cantidad_medida: {type: String},
+        cantidad_medida: {type: Number},
         categoria: {type: String},
     },{
         timestamps: false,

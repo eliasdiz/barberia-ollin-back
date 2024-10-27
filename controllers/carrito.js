@@ -7,13 +7,14 @@ const controller = {
         req.body.productos = []
         req.body.total = 0
         req.body.activo = true
-        req.body.cliente_id = req.params.id
+        // req.body.cliente_id = req.params.id
         try {
-            await Carrito.create(req.body)
+            let carrito = await Carrito.create(req.body)
             return res
                 .status(201)
-                .json({ message: 'carrito creado'})
+                .json({ message: 'carrito creado', carrito})
         } catch (error) {
+            console.log(error)
             next(error)
         }
     },
