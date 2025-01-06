@@ -5,7 +5,9 @@ const schema = new mongoose.Schema(
         cliente_id:{type: mongoose.Types.ObjectId, ref: 'Users'},
         fecha: {type: Date},
         productos: [{
+            _id: false,
             producto_id: {type: mongoose.Types.ObjectId, ref: 'Productos'},
+            descripcion: {type: String},
             cantidad: {type: Number},
             precio: {type: Number}
         }],

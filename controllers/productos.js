@@ -16,6 +16,7 @@ const controller = {
     getTodos: async(req,res,next) => {
         try {
             let productos = await Productos.find()
+                .sort({descripcion: 1})
             return res
                 .status(200)
                 .json({ productos})
