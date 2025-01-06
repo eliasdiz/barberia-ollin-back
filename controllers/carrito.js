@@ -23,9 +23,31 @@ const controller = {
         try {
             let carritos = await Carrito.find()
                 .populate('cliente_id','nombres apellidos')
+                carritos = carritos.sort((a,b) => a.cliente_id.nombres.localeCompare(b.cliente_id.nombres))
             return res
                 .status(200)
                 .json({ carritos})
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    actCarrito: async(req,res,next) => {
+        try {
+            let carrito = await Carrito.findByIdAndUpdate(
+                req.params.id,
+                { $push: {productos: req.body.productos}},
+                {new: true}
+            )
+            if(carrito){
+                return res
+                    .status(200)
+                    .json({ carrito})
+            }else{
+                return res
+                    .status(404)
+                    .json({message: 'carrito no encontrado'})
+            }
         } catch (error) {
             next(error)
         }
