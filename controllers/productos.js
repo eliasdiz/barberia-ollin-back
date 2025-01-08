@@ -14,8 +14,10 @@ const controller = {
     },
 
     getTodos: async(req,res,next) => {
+        const query = {}
+        if(req.query.descripcion) query.descripcion = { $regex: new RegExp(req.query.descripcion,'i')}
         try {
-            let productos = await Productos.find()
+            let productos = await Productos.find(query)
                 .sort({descripcion: 1})
             return res
                 .status(200)
