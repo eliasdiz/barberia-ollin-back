@@ -6,12 +6,13 @@ import schemaCrear from '../Schemas/crearProducto.js'
 import productoExiste from '../middlewares/crearProducto.js'
 
 
-const { crear, getTodos} = controller
+const { crear, getTodos, editar} = controller
 
 const router = express.Router()
 
 router.post('/', passport.authenticate('jwt',{session:false}), validator(schemaCrear), productoExiste,crear)
 router.get('/', passport.authenticate('jwt',{session:false}),getTodos)
+router.put('/editar/:id', passport.authenticate('jwt',{session: false}), editar)
 
 export default router
 

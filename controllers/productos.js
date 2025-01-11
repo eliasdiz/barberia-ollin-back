@@ -25,6 +25,17 @@ const controller = {
         } catch (error) {
             next(error)
         }
+    },
+
+    editar: async(req,res,next) => {
+        try {
+            let producto = await Productos.findByIdAndUpdate(req.params.id, req.body,{new: true})
+            return res
+                .status(200)
+                .json({ message: 'producto actualizado', producto})
+        } catch (error) {
+            next()
+        }
     }
 }
 
